@@ -1,3 +1,9 @@
+"""Logging configuration for the Bank Churn Modelling project.
+
+This module sets up a custom logger with both file and console handlers.
+Logs are stored in the 'logs' directory with rotation to manage file sizes.
+"""
+
 import logging
 import os
 from datetime import datetime
@@ -12,7 +18,7 @@ LOG_FILE = f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 LOG_FILE_PATH = os.path.join(LOG_DIR, LOG_FILE)
 
 # Create logger
-logger = logging.getLogger("MLProjectLogger")
+logger = logging.getLogger("BankChurnLogger")
 logger.setLevel(logging.INFO)
 logger.propagate = False  # Prevent duplicate logs
 

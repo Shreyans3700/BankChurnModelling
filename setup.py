@@ -1,3 +1,9 @@
+"""Setup configuration for BankChurnModelling package.
+
+This module defines the installation and package metadata for the BankChurnModelling
+deep learning project, which implements churn prediction models for banking customers.
+"""
+
 from setuptools import setup
 
 setup(

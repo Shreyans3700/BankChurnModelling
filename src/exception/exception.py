@@ -1,3 +1,9 @@
+"""Custom exception handling for the Bank Churn Modelling project.
+
+This module defines custom exception classes and utilities for detailed error
+reporting with file and line number information.
+"""
+
 import sys
 from src.logger.logging import logging
 

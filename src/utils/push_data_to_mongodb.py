@@ -1,3 +1,9 @@
+"""Data extraction and MongoDB upload utilities.
+
+This module provides utilities for converting CSV data to JSON format and
+pushing the data to MongoDB collections.
+"""
+
 import os
 import sys
 import json
@@ -10,12 +16,26 @@ from src.logger.logging import logging
 
 load_dotenv()
 
-mongodb_url = os.getenv("MONGODB_URL_KEY")
+mongoodb_url = os.getenv("MONGODB_URL_KEY")
 ca = certifi.where()
 
 
 class NetworkDataExtractor:
+    """Extract and push network/data records to MongoDB.
+    
+    This class handles conversion of CSV data to JSON and uploading to MongoDB
+    databases and collections.
+    """
     def __init__(self, database, collection):
+        """Initialize the data extractor with database and collection info.
+        
+        Args:
+            database (str): Name of the MongoDB database.
+            collection (str): Name of the MongoDB collection.
+            
+        Raises:
+            CustomException: If MongoDB connection fails.
+        """
         try:
             self.database = database
             self.collection = collection
@@ -24,6 +44,17 @@ class NetworkDataExtractor:
             raise CustomException(e, sys)
 
     def csv_to_json_converter(self, csv_file_path: str):
+        """Convert CSV file to JSON format.
+        
+        Args:
+            csv_file_path (str): Path to the input CSV file.
+            
+        Returns:
+            list: List of dictionaries representing JSON records.
+            
+        Raises:
+            CustomException: If CSV conversion fails.
+        """
         try:
             data = pd.read_csv(csv_file_path)
             data.reset_index(drop=True, inplace=True)
@@ -36,6 +67,17 @@ class NetworkDataExtractor:
             raise CustomException(e, sys)
 
     def push_data_to_mongodb(self, data: list):
+        """Push data records to MongoDB collection.
+        
+        Args:
+            data (list): List of dictionaries to insert into MongoDB.
+            
+        Returns:
+            bool: True if insertion was successful, False otherwise.
+            
+        Raises:
+            CustomException: If MongoDB insertion fails.
+        """
         try:
             db = self.client[self.database]
             collection = db[self.collection]

@@ -5,3 +5,6 @@ scikit-learn
 matplotlib
 streamlit
 ipykernel
+pymongo
+dotenv
+certifi

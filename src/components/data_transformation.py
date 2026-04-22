@@ -43,6 +43,7 @@ class DataTransformation:
         self.target_transformation_object_path = os.path.join(
             self.transformation_object_dir, config.TRANSFORMATION_OBJECT_PATH
         )
+        self.cols_to_drop = list(config.COLS_TO_DROP)   
 
     def read_data(self, data_path: str) -> pd.DataFrame:
         try:
@@ -94,9 +95,11 @@ class DataTransformation:
         try:
             logger.info("Starting data transformation process.")
             train_df = self.read_data(self.raw_train_data_path)
+            train_df = train_df.drop(columns=self.cols_to_drop, errors="ignore")
             X_train = train_df.drop(columns=[self.target_column], errors="ignore")
             y_train = train_df[self.target_column]
             test_df = self.read_data(self.raw_test_data_path)
+            test_df = test_df.drop(columns=self.cols_to_drop, errors="ignore")
             X_test = test_df.drop(columns=[self.target_column], errors="ignore")
             y_test = test_df[self.target_column]
 
@@ -104,6 +107,7 @@ class DataTransformation:
             # Fit the pipeline on the training data and transform both train and test data
             X_train = preprocessing_pipeline.fit_transform(X_train)
             X_test = preprocessing_pipeline.transform(X_test)
+
 
             os.makedirs(self.data_transormation_dir, exist_ok=True)
             save_numpy_array_data(self.transformed_train_data_path, X_train, y_train)

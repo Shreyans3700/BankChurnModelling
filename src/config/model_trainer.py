@@ -1,0 +1,25 @@
+import sys
+from dataclasses import dataclass
+from src.exception.exception import CustomException
+
+class ModelTrainerConfig:
+    """
+    Class for model trainer constants.
+    """
+    try:
+        MODEL_TRAINER_DIR_NAME: str = "models"
+        MODEL_TRAINER_MODEL_FILE_NAME: str = "model.pkl"
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
+@dataclass
+class ModelTrainerArtifact:
+    """
+    Class for model trainer artifact.
+    """
+    try:
+        model_dir_path: str
+        model_file_path: str
+    except Exception as e:
+        raise CustomException(e, sys)

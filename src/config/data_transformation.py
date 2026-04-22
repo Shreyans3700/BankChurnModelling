@@ -12,11 +12,12 @@ class DataTransformationConfig:
     """
 
     try:
-        TRANSFORMED_TRAIN_DATA_PATH: str = "train_data.csv"
-        TRANSFORMED_TEST_DATA_PATH: str = "test_data.csv"
+        TRANSFORMED_TRAIN_DATA_PATH: str = "train_data.npz"
+        TRANSFORMED_TEST_DATA_PATH: str = "test_data.npz"
         TARGET_COLUMN: str = "Exited"
         TRANSFORMATION_OBJECT_DIR: str = "models"
         TRANSFORMATION_OBJECT_PATH: str = "transformation_object.pkl"
+        COLS_TO_DROP: tuple = ("RowNumber", "CustomerId", "Surname")
     except Exception as e:
         raise CustomException(e, sys)
 

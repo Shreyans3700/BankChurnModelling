@@ -73,7 +73,7 @@ Open two terminals:
 
 **Terminal 1 — Backend**
 ```bash
-python main.py
+uvicorn main:app --reload --port 8080
 ```
 API will be available at `http://localhost:8080`
 

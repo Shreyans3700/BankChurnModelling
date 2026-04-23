@@ -76,7 +76,11 @@ class DataTransformation:
             pipeline = ColumnTransformer(
                 [
                     ("num_pipeline", StandardScaler(), numerical_cols),
-                    ("cat_pipeline", OneHotEncoder(), categorical_cols),
+                    (
+                        "cat_pipeline",
+                        OneHotEncoder(handle_unknown="ignore"),
+                        categorical_cols,
+                    ),
                 ]
             )
             return pipeline

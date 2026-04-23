@@ -31,5 +31,6 @@ if __name__ == "__main__":
             transformation_artifacts=transformation_artifacts,
         )
         model_trainer_artifacts = model_trainer_obj.initiate_model_trainer()
+        logging.info(f"Model Trainer Artifacts: {model_trainer_artifacts}")
     except Exception as e:
         raise CustomException(e, sys)

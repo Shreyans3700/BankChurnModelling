@@ -8,7 +8,7 @@ class ModelTrainerConfig:
     """
     try:
         MODEL_TRAINER_DIR_NAME: str = "models"
-        MODEL_TRAINER_MODEL_FILE_NAME: str = "model.pkl"
+        MODEL_TRAINER_MODEL_FILE_NAME: str = "model.h5"
     except Exception as e:
         raise CustomException(e, sys)
 

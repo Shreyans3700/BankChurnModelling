@@ -1,10 +1,8 @@
 import os
 import sys
-import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.callbacks import EarlyStopping
-from tensorflow.keras.optimizers import Adam
 from src.utils.utils import load_numpy_array_data, save_object
 from src.exception.exception import CustomException
 from src.config.data_transformation import DataTransformationArtifacts
@@ -83,6 +81,32 @@ class ModelTrainer:
                 optimizer="adam",
                 input_shape=X_train.shape[1],
             )
+
+            early_stopping = EarlyStopping(
+                monitor="val_loss",
+                patience=5,
+                restore_best_weights=True,
+            )
+
+            model.fit(
+                X_train,
+                y_train,
+                validation_data=(X_test, y_test),
+                epochs=100,
+                batch_size=32,
+                callbacks=[early_stopping],
+            )
+
+            save_object(
+                file_path=os.path.join(self.model_dir_name, self.model_file_name),
+                obj=model,
+            )
+
+            return ModelTrainerArtifact(
+                model_dir_path=self.model_dir_name,
+                model_file_path=os.path.join(self.model_dir_name, self.model_file_name),
+            )
+
             logging.info(model.summary())
         except Exception as e:
             raise CustomException(e, sys)

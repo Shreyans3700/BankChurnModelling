@@ -19,7 +19,7 @@ class ModelTrainerArtifact:
     Class for model trainer artifact.
     """
     try:
-        model_dir_path: str
-        model_file_path: str
+        MODEL_DIR_PATH: str
+        MODEL_FILE_PATH: str
     except Exception as e:
         raise CustomException(e, sys)

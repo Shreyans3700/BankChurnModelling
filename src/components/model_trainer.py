@@ -103,8 +103,8 @@ class ModelTrainer:
             )
 
             return ModelTrainerArtifact(
-                model_dir_path=self.model_dir_name,
-                model_file_path=os.path.join(self.model_dir_name, self.model_file_name),
+                MODEL_DIR_PATH=self.model_dir_name,
+                MODEL_FILE_PATH=os.path.join(self.model_dir_name, self.model_file_name),
             )
 
             logging.info(model.summary())
